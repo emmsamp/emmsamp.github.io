@@ -1,44 +1,446 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<title>Web de Emmanuel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicken Pío - La Mejor Pollería</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            border-bottom: 5px solid #ffd700;
+        }
+        
+        .logo {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+        }
+        
+        .logo i {
+            font-style: normal;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Navegación */
+        .nav {
+            background: #fff;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .nav a {
+            text-decoration: none;
+            color: #ff6b00;
+            font-weight: bold;
+            padding: 5px 10px;
+            transition: all 0.3s;
+        }
+        
+        .nav a:hover {
+            background: #ff6b00;
+            color: white;
+            border-radius: 5px;
+        }
+        
+        /* Secciones */
+        .section {
+            padding: 60px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #ff6b00;
+            font-size: 36px;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: "🐔";
+            display: block;
+            font-size: 30px;
+            margin-top: 10px;
+        }
+        
+        /* Menú */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .menu-item {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border: 1px solid #ffd700;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255,107,0,0.2);
+        }
+        
+        .menu-item h3 {
+            color: #ff6b00;
+            margin-bottom: 15px;
+            font-size: 24px;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 10px;
+        }
+        
+        .price {
+            color: #ff6b00;
+            font-size: 28px;
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+        
+        /* Promociones */
+        .promo-banner {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .promo-banner h3 {
+            color: #ff6b00;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        /* Ubicación */
+        .location-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .map-container {
+            background: #f5f5f5;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .address-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Contacto */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .contact-item {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid #ffd700;
+        }
+        
+        .contact-item i {
+            font-size: 48px;
+            color: #ff6b00;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #ff6b00;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+        
+        .btn:hover {
+            background: #ff8c00;
+            transform: scale(1.05);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 24px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .location-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 36px;
+            }
+        }
+        
+        /* Animaciones */
+        .floating-chicken {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff6b00;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            animation: pulse 2s infinite;
+            z-index: 999;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
 </head>
 <body>
-	<header>
-    	<h1>Bienvenidos a mi sitio web</h1>
-	</header>
-	<nav>
-    	<ul>
-        	<li><a href="#inicio">Inicio</a></li>
-        	<li><a href="#acerca">Acerca de</a></li>
-        	<li><a href="#contacto">Contacto</a></li>
-    	</ul>
-	</nav>
-	<section id="inicio">
-    	<h2>Inicio</h2>
-    	<p>Mi nombre es <strong>EMMANUEL HUMBERTO SAMPERIO GUZMÁN</strong> y soy Mtro. En Tecnologías de la Información y Comunicaciones.
-        </p>
-    	<img src="Emmanuel.png" alt="Descripción de la imagen" width="200" height="200">
-	</section>
-    <section id="acerca ">
-    	<h2>Acerca de</h2>
-        <p>Me gusta dar clases y enseñar cosas que les puedan ayudar a su día a día a los alunmos. <br>
-            Me gusta mucho la musica, las peliculas de terror y disfruto de jugar Video Juegos. 
-        </p>
-        <section id="acerca ">
-    	<h2>Acerca de</h2>
-        <p>Me gusta dar clases y enseñar cosas que les puedan ayudar a su día a día a los alunmos. <br>
-            Me gusta mucho la musica, las peliculas de terror y disfruto de jugar Video Juegos. 
-        </p>
+    <div class="floating-chicken">
+        🐔
+    </div>
+
+    <div class="header">
+        <div class="container">
+            <div class="logo">
+                🐔 Chicken Pío <i>🍗</i>
+            </div>
+            <p>¡El pollo más sabroso y crocante de la ciudad!</p>
+        </div>
+    </div>
+
+    <div class="nav">
+        <div class="container">
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#promociones">Promociones</a></li>
+                <li><a href="#ubicacion">Ubicación</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Sección de Menú -->
+    <section id="menu" class="section">
+        <div class="container">
+            <h2 class="section-title">Nuestro Delicioso Menú</h2>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <h3>🍗 Pollo a la Brasa</h3>
+                    <p>1/4 de pollo con papas fritas y ensalada fresca</p>
+                    <span class="price">S/25.90</span>
+                </div>
+                <div class="menu-item">
+                    <h3>🍖 Pollo Broaster</h3>
+                    <p>Piezas crocantes con salsa de la casa</p>
+                    <span class="price">S/18.90</span>
+                </div>
+                <div class="menu-item">
+                    <h3>🥤 Combos Familiares</h3>
+                    <p>1 pollo entero + papas grandes + gaseosa 1.5L</p>
+                    <span class="price">S/65.90</span>
+                </div>
+                <div class="menu-item">
+                    <h3>🍟 Alitas Picantes</h3>
+                    <p>6 alitas con salsa buffalo y cremas</p>
+                    <span class="price">S/22.90</span>
+                </div>
+                <div class="menu-item">
+                    <h3>🥗 Ensalada Pío</h3>
+                    <p>Mix de vegetales con pollo deshilachado</p>
+                    <span class="price">S/16.90</span>
+                </div>
+                <div class="menu-item">
+                    <h3>🍚 Arroz con Pollo</h3>
+                    <p>Receta tradicional con verduras frescas</p>
+                    <span class="price">S/19.90</span>
+                </div>
+            </div>
+        </div>
     </section>
-        <section id="contacto ">
-            <h2>Contacto</h2>
-            <a href="d.emmanuelsamperiog54@dgb.edu.mx">Email</a>
-            
+
+    <!-- Sección de Promociones -->
+    <section id="promociones" class="section">
+        <div class="container">
+            <div class="promo-banner">
+                <h3>🎉 PROMOCIÓN DEL DÍA 🎉</h3>
+                <p style="font-size: 24px; margin: 20px 0;">1/4 Pollo + Gaseosa Personal + Papas</p>
+                <p style="font-size: 36px; font-weight: bold; color: #ff6b00;">S/19.90</p>
+                <a href="#contacto" class="btn">¡ORDENA AHORA!</a>
+            </div>
+        </div>
     </section>
-	<footer>
-    	<p>Derechos reservados 2025.</p>
-	</footer>
+
+    <!-- Sección de Ubicación -->
+    <section id="ubicacion" class="section">
+        <div class="container">
+            <h2 class="section-title">📍 Encuéntranos</h2>
+            <div class="location-info">
+                <div class="map-container">
+                    <!-- Aquí puedes insertar el iframe de Google Maps -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.999999!2d-77.042793!3d-12.046374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8b3e1e1e1e1%3A0x123456789!2sLima%2C%20Peru!5e0!3m2!1ses!2spe!4v1234567890" 
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+                <div class="address-card">
+                    <h3 style="color: #ff6b00; margin-bottom: 20px;">🏢 Nuestra Sucursal</h3>
+                    <p style="margin-bottom: 15px;"><strong>Dirección:</strong> Av. Principal 123, Miraflores</p>
+                    <p style="margin-bottom: 15px;"><strong>Horario:</strong> Martes a Domingo - 12:00 pm a 10:00 pm</p>
+                    <p style="margin-bottom: 15px;"><strong>Lunes:</strong> Cerrado por mantenimiento</p>
+                    <p style="margin-bottom: 15px;"><strong>Delivery:</strong> A través de Rappi y Uber Eats</p>
+                    <a href="https://goo.gl/maps" target="_blank" class="btn">Cómo llegar 🗺️</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="section">
+        <div class="container">
+            <h2 class="section-title">📱 Contáctanos</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i>📞</i>
+                    <h3>Teléfono</h3>
+                    <p>(01) 555-1234</p>
+                    <p>987 654 321</p>
+                    <a href="tel:015551234" class="btn">Llamar ahora</a>
+                </div>
+                <div class="contact-item">
+                    <i>📱</i>
+                    <h3>WhatsApp</h3>
+                    <p>Respuesta inmediata</p>
+                    <p>+51 987 654 321</p>
+                    <a href="https://wa.me/51987654321" target="_blank" class="btn">Enviar WhatsApp</a>
+                </div>
+                <div class="contact-item">
+                    <i>📧</i>
+                    <h3>Email</h3>
+                    <p>info@chickenpio.pe</p>
+                    <p>pedidos@chickenpio.pe</p>
+                    <a href="mailto:info@chickenpio.pe" class="btn">Enviar correo</a>
+                </div>
+                <div class="contact-item">
+                    <i>📲</i>
+                    <h3>Delivery</h3>
+                    <p>Rappi • Uber Eats</p>
+                    <p>PedidosYa</p>
+                    <a href="#" class="btn">Pedir delivery</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div style="font-size: 32px; margin-bottom: 20px;">
+                🐔 Chicken Pío
+            </div>
+            <p style="margin-bottom: 20px;">"El pollo que hace pío de felicidad a tu paladar"</p>
+            <div class="social-links">
+                <a href="#">📘</a>
+                <a href="#">📷</a>
+                <a href="#">🐦</a>
+                <a href="#">🎵</a>
+            </div>
+            <p style="margin-top: 30px; font-size: 14px;">
+                © 2024 Chicken Pío - Todos los derechos reservados
+            </p>
+            <p style="margin-top: 10px; font-size: 12px;">
+                Hecho con ❤️ para los amantes del pollo
+            </p>
+        </div>
+    </footer>
 </body>
 </html>
